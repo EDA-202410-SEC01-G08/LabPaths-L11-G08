@@ -94,6 +94,10 @@ def optionFour(cont, initialStation):
 
 
 def optionFive(cont, initialStation, searchMethod):
+    print('Estableciendo metodo de busqueda')
+   #searchMethod = input ('Escriba si el recorrido que desea hacer es bfs o dfs: ')
+    controller.searchPaths(cont,initialStation,searchMethod)
+    print("Cargando")
     # TODO Lab 11, conectar con la funcion del controller searchPaths
     pass
 
@@ -165,8 +169,12 @@ def thread_cycle():
             optionFour(cont, initialStation)
 
         elif int(inputs) == 5:
+            msg = "Estación Base: BusStopCode-ServiceNo (Ej: 75009-10): "
+            initialStation = input(msg)
+            mtd = ('Escriba si el recorrido que desea hacer es bfs o dfs: ')
+            searchMethod = input(mtd)
+            optionFive(cont, initialStation, searchMethod)
             # TODO Lab 11, completar inputs opt 5, searchMethod, initialStation
-            pass
 
         elif int(inputs) == 6:
             destStation = input("Estación destino (Ej: 15151-10): ")

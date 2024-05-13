@@ -29,7 +29,10 @@ from DISClib.ADT import map as m
 from DISClib.ADT import list as lt
 from DISClib.Algorithms.Graphs import scc
 from DISClib.Algorithms.Graphs import dijsktra as djk
-# TODO Lab 11, agregar importaciones dfs y bfs
+# TODO hecho Lab 11, agregar importaciones dfs y bfs
+from DISClib.Algorithms.Graphs import bfs
+from DISClib.Algorithms.Graphs import dfs
+
 from DISClib.Utils import error as error
 assert config
 
@@ -53,12 +56,13 @@ def newAnalyzer():
            vertice determinado a todos los otros vértices del grafo
     """
     try:
-        # TODO Lab 11, agregar llave "search" para usar dfs y bfs
+        # TODO Hecho Lab 11, agregar llave "search" para usar dfs y bfs
         analyzer = {
             'stops': None,
             'connections': None,
             'components': None,
             'paths': None,
+            'method':None
         }
 
         analyzer['stops'] = m.newMap(numelements=14000,
@@ -69,6 +73,7 @@ def newAnalyzer():
                                               directed=True,
                                               size=14000,
                                               cmpfunction=compareStopIds)
+        analyzer['method']="bfs"
         return analyzer
     except Exception as exp:
         error.reraise(exp, 'model:newAnalyzer')
@@ -215,12 +220,12 @@ def searchPaths(analyzer, initialStation, method):
     Returns:
         dict: devuelve el analyzer del modelo
     """
-    # TODO Lab 11, ejecutar DepthFirstSearch de dfs
+    # TODO Hecho Lab 11, ejecutar DepthFirstSearch de dfs
     if method == "dfs":
-        pass
-    # TODO Lab 11, ejecutar BreadhtFisrtSearch de bfs
+        dfs.DepthFirstSearch(analyzer['paths'],initialStation)
+    # TODO Hecho Lab 11, ejecutar BreadhtFisrtSearch de bfs
     elif method == "bfs":
-        pass
+        bfs.BreathFirstSearch(analyzer['paths'],initialStation)
     return analyzer
 
 
@@ -234,12 +239,12 @@ def hasSearchPath(analyzer, destStation, method):
         destStation (vertice): estacion de destino para el recorrido
         method (str, optional): algoritmo de busqueda. Por defecto es "dfs"
     """
-    # TODO Lab 11, ejecutar hasPathTo por dfs
+    # TODO Hecho Lab 11, ejecutar hasPathTo por dfs
     if method == "dfs":
-        return None
-    # TODO Lab 11, ejecutar hasPathTo por bfs
+        return dfs.hasPathTo(analyzer['paths'],destStation)
+    # TODO Hecho Lab 11, ejecutar hasPathTo por bfs
     elif method == "bfs":
-        return None
+        return bfs.hasPathTo(analyzer['paths'],destStation)
 
 
 def searchPathTo(analyzer, destStation, method):
@@ -256,12 +261,12 @@ def searchPathTo(analyzer, destStation, method):
         stack: devuele una pila con el camino encontrado en la busqueda.
     """
     path = None
-    # TODO Lab 11, ejecutar pathTo por dfs
+    # TODO Hecho Lab 11, ejecutar pathTo por dfs
     if method == "dfs":
-        pass
-    # TODO Lab 11, ejecutar pathTo por bfs
+        path = dfs.pathTo(analyzer['paths'],destStation)
+    # TODO Hecho Lab 11, ejecutar pathTo por bfs
     elif method == "bfs":
-        pass
+        path= bfs.pathTo(analyzer['paths'],destStation)
     return path
 
 
