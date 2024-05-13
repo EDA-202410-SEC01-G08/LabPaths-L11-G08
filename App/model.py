@@ -62,7 +62,7 @@ def newAnalyzer():
             'connections': None,
             'components': None,
             'paths': None,
-            'method':None
+            'search':None
         }
 
         analyzer['stops'] = m.newMap(numelements=14000,
@@ -73,7 +73,7 @@ def newAnalyzer():
                                               directed=True,
                                               size=14000,
                                               cmpfunction=compareStopIds)
-        analyzer['method']="bfs"
+        analyzer['search']="bfs"
         return analyzer
     except Exception as exp:
         error.reraise(exp, 'model:newAnalyzer')
@@ -221,11 +221,14 @@ def searchPaths(analyzer, initialStation, method):
         dict: devuelve el analyzer del modelo
     """
     # TODO Hecho Lab 11, ejecutar DepthFirstSearch de dfs
+    
     if method == "dfs":
         dfs.DepthFirstSearch(analyzer['paths'],initialStation)
+        method=analyzer['searh']
     # TODO Hecho Lab 11, ejecutar BreadhtFisrtSearch de bfs
     elif method == "bfs":
         bfs.BreathFirstSearch(analyzer['paths'],initialStation)
+        method=analyzer['searh']
     return analyzer
 
 
@@ -261,14 +264,14 @@ def searchPathTo(analyzer, destStation, method):
         stack: devuele una pila con el camino encontrado en la busqueda.
     """
     path = None
+    z=analyzer['paths']
     # TODO Hecho Lab 11, ejecutar pathTo por dfs
     if method == "dfs":
-        path = dfs.pathTo(analyzer['paths'],destStation)
+        return dfs.pathTo(z,destStation)
     # TODO Hecho Lab 11, ejecutar pathTo por bfs
     elif method == "bfs":
-        path= bfs.pathTo(analyzer['paths'],destStation)
-    return path
-
+         return bfs.pathTo(z,destStation)
+    
 
 def totalStops(analyzer):
     """

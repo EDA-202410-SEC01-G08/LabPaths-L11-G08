@@ -44,7 +44,7 @@ operación seleccionada.
 # ___________________________________________________
 
 
-servicefile = 'bus_routes_14000.csv'
+servicefile = 'bus_routes_3000.csv'
 initialStation = None
 searchMethod = None
 
@@ -56,7 +56,7 @@ searchMethod = None
 def printMenu():
     print("\n")
     print("*******************************************")
-    # TODO Lab 11, asegurarse de completar las opciones 5, 9 y 10
+    # TODO Listo Lab 11, asegurarse de completar las opciones 5, 9 y 10
     print("Bienvenido")
     print("1- Inicializar Analizador")
     print("2- Cargar información de buses de singapur")
@@ -95,11 +95,10 @@ def optionFour(cont, initialStation):
 
 def optionFive(cont, initialStation, searchMethod):
     print('Estableciendo metodo de busqueda')
-   #searchMethod = input ('Escriba si el recorrido que desea hacer es bfs o dfs: ')
+   
     controller.searchPaths(cont,initialStation,searchMethod)
     print("Cargando")
-    # TODO Lab 11, conectar con la funcion del controller searchPaths
-    pass
+    # TODO Listo Lab 11, conectar con la funcion del controller searchPaths
 
 
 def optionSix(cont, initialStation, destStation):
@@ -128,16 +127,18 @@ def optionEight(cont):
 
 
 def optionNine(cont, destStation, searchMethod):
-    # TODO Lab 11, conectar con la funcion del controller hasSearchPath
-    haspath = None
+
+    # TODO Listo Lab 11, conectar con la funcion del controller hasSearchPath
+    print('Estableciendo metodo de busqueda')  
+    haspath = controller.hasSearchPath(cont, destStation,searchMethod)
     print(haspath)
 
 
 def optionTen(cont, destStation, searchMethod):
-    # TODO Lab 11, conectar con la funcion del controller searchPathTo
-    path = None
+    # TODO Listo Lab 11, conectar con la funcion del controller searchPathTo
+    path = controller.searchPathTo(cont,destStation,searchMethod)
     if path is not None:
-        pass
+        print (path)
     else:
         print('No hay camino')
 
@@ -174,7 +175,7 @@ def thread_cycle():
             mtd = ('Escriba si el recorrido que desea hacer es bfs o dfs: ')
             searchMethod = input(mtd)
             optionFive(cont, initialStation, searchMethod)
-            # TODO Lab 11, completar inputs opt 5, searchMethod, initialStation
+            # TODO Listo Lab 11, completar inputs opt 5, searchMethod, initialStation
 
         elif int(inputs) == 6:
             destStation = input("Estación destino (Ej: 15151-10): ")
@@ -188,12 +189,16 @@ def thread_cycle():
             optionEight(cont)
 
         elif int(inputs) == 9:
-            # TODO Lab 11, completar inputs opt 9, destStation
+            destStation= input("Estación destino (Ej: 15151-10): ")
+            searchMethod = input('forma en la que se va a buscar bfs o dfs: ')
+            optionNine(cont, destStation, searchMethod)
+            # TODO Listo Lab 11, completar inputs opt 9, destStation
             pass
 
         elif int(inputs) == 10:
-            # TODO Lab 11, completar inputs opt 10, destStation
-            pass
+            destStation= input("Estación destino (Ej: 15151-10): ")
+            searchMethod = input('forma en la que se va a buscar bfs o dfs: ')
+            optionTen(cont, destStation, searchMethod)
 
         else:
             sys.exit(0)

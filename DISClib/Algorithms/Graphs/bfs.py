@@ -139,10 +139,10 @@ def pathTo(search, vertex):
             return None
         path = stack.newStack()
         while vertex != search['source']:
-            stack.push(path, vertex)
+            stack.push(path, vertex) 
             vertex = map.get(search['visited'],
                              vertex)['value']['edgeTo']
         stack.push(path, search['source'])
-        return path
+        return 
     except Exception as exp:
         error.reraise(exp, 'bfs:pathto')
