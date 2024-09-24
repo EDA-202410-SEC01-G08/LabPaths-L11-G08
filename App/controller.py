@@ -153,7 +153,7 @@ def searchPathTo(analyzer, destStation, searchMethod):
     # TODO Lab 11, conectar con la funcion del model searchPathTo
     return model.searchPathTo(analyzer,destStation,searchMethod)
 
-
+a
 def servedRoutes(analyzer):
     """
     Retorna el camino de costo minimo desde initialStation a destStation
